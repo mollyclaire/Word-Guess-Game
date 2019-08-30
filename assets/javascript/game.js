@@ -7,6 +7,9 @@ var dash = [];
 // Create an empty array of guessed letters
 var guessedLetters = [];
 
+// Create an array of letters in the word
+var lettersInWord = [];
+
 // Computer randomly selects one word
 var randomGuess = artistList[Math.floor(Math.random() * artistList.length)];
 console.log(randomGuess);
@@ -34,20 +37,29 @@ document.onkeyup = function(event) {
     var userGuess = event.key;
 // Searches for a correct letter within a random word (chosen by the computer)
     var correctLetter = artistList.indexOf(randomGuess);
+// If the letter is in the word, a dash is replaced with the letter that was guessed 
         if (correctLetter != -1) {
         dash.push(correctLetter);
-        // correctLetter = artistList.indexOf(element, correctLetter + 1);
-        } else {
+        } else { // Else, the letter appears in the "Letters Already Guessed" list
         guessedLetters.push(userGuess);
         }
+        console.log(correctLetter);
 
-        console.log(dash);
+// The number of guesses remaining decreases one number
 
 }
 
-// The number of guesses remaining decreases one number
-// If the letter is in the word, a dash is replaced with the letter that was guessed 
-// Else, the letter appears in the "Letters Already Guessed" list
+// This function governs what happens when the user makes an incorrect guess (that they haven't guessed before)
+function updateGuesses(letter) {
+    if (guessedLetters.indexOf(letter) === -1 && lettersInWord.indexOf(letter) === -1) {
+        this.guessLetters.push(letter);
+        this.guessesRemaining--;
+
+        document.querySelector("numbersGuessedText").innerHTML = guessesRemaining;
+        document.querySelector("lettersGuessedText").innerHTML = guessedLetters.join(", ");
+    }
+}
+
 // The user presses another letter key
 // The above steps are repeated UNTIL
 // All letters have been guessed and the user wins
@@ -56,13 +68,11 @@ document.onkeyup = function(event) {
 // If the user loses, alert "You lost!"
 
 // This might search for a letter:
-
-// var indices(dash) = [];
-// var array(artistList) = ['a', 'b', 'a', 'c', 'a', 'd'];
-// var element(randomGuess) = 'a';
-// var (ids)correctLetter = artistList.indexOf(randomGuess);
-// while (correctLetter != -1) {
-//   dash.push(correctLetter);
-//   correctLetter = artistList.indexOf(element, correctLetter + 1);
-// }
-// console.log(dash);
+    // var indices(dash) = [];
+    // var array(artistList) = ['a', 'b', 'a', 'c', 'a', 'd'];
+    // var element(randomGuess) = 'a';
+    // var (ids)correctLetter = artistList.indexOf(randomGuess);
+    // while (correctLetter != -1) {
+    //   dash.push(correctLetter);
+    //   correctLetter = artistList.indexOf(element, correctLetter + 1); <
+    // }
