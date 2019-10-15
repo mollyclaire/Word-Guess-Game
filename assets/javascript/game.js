@@ -39,9 +39,18 @@ function start() {
    dashesAndLetters = [];
    wrongGuesses = [];
 
-  for (var i = 0; i < numBlanks; i++) {
+    // A dash is created (or pushed into the dashesAndLetters array) for every number that is held in numBlanks
+    for (var i = 0; i < numBlanks; i++) {
     dashesAndLetters.push("_");
-  }
+    }
+    console.log(dashesAndLetters);
+
+    // Rendering to the page here!
+    document.getElementById('guesses-left').innerHTML = guessesRemaining;
+    // The .join method here will create blank spaces (and not commas) between the letters
+    document.getElementById('word-blanks').innerHTML = dashesAndLetters.join(" ");
+    document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
+
 }
 start() 
 
