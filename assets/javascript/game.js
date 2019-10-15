@@ -82,34 +82,34 @@ function compareLetters(letter) {
 
 function roundComplete() {
     // Update the HTML to reflect the new number of guesses. Also update the correct guesses.
-  document.getElementById("guesses-left").innerHTML = numGuesses;
+  document.getElementById("guesses-left").innerHTML = guessesRemaining;
   // This will print the array of guesses and blanks onto the page.
-  document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+  document.getElementById("word-blanks").innerHTML = dashesAndLetters.join(" ");
   // This will print the wrong guesses onto the page.
   document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
 
    // If we have gotten all the letters to match the solution...
-   if (lettersInChosenWord.toString() === blanksAndSuccesses.toString()) {
+   if (lettersInChosenWord.toString() === dashesAndLetters.toString()) {
     // ..add to the win counter & give the user an alert.
-    winCounter++;
+    wins++;
     alert("You win!");
 
     // Update the win counter in the HTML & restart the game.
-    document.getElementById("win-counter").innerHTML = winCounter;
+    document.getElementById("win-counter").innerHTML = wins;
     startGame();
   }
 
     // If we've run out of guesses..
-    else if (numGuesses === 0) {
+    else if (guessesRemaining === 0) {
         // Add to the loss counter.
-        lossCounter++;
+        losses++;
         // Give the user an alert.
         alert("You lose");
     
         // Update the loss counter in the HTML.
-        document.getElementById("loss-counter").innerHTML = lossCounter;
+        document.getElementById("loss-counter").innerHTML = losses;
         // Restart the game.
-        startGame();
+        start();
       }
 }
 
@@ -126,7 +126,7 @@ document.onkeyup = function(event) {
       var letterGuessed = event.key.toLowerCase();
       // The letter is then run through the compareLetters function
       compareLetters(letterGuessed);
-      
+
       // Runs the code after each round is done.
       roundComplete();
     }
