@@ -30,10 +30,11 @@ function start() {
    console.log(chosenWord);
 
     // The word is broken down into letters
-   lettersinChosenWord = chosenWord.split(""); 
+   lettersInChosenWord = chosenWord.split(""); 
+   console.log(lettersInChosenWord);
 
    // The .length property here will tell us how many letters/blanks are in the word
-   numBlanks = lettersinChosenWord.length; 
+   numBlanks = lettersInChosenWord.length; 
 
    // Reset both arrays from potential previous round
    dashesAndLetters = [];
@@ -43,7 +44,7 @@ function start() {
     for (var i = 0; i < numBlanks; i++) {
     dashesAndLetters.push("_");
     }
-    console.log(dashesAndLetters);
+    // console.log(dashesAndLetters);
 
     // Rendering to the page here!
     document.getElementById('guesses-left').innerHTML = guessesRemaining;
@@ -54,6 +55,7 @@ function start() {
 }
 
 function compareLetters(letter) {
+    console.log(lettersInChosenWord)
     // Boolean to test whether the letter exists in the chosen word or not
     var letterInWord = false;
 
@@ -81,6 +83,9 @@ function compareLetters(letter) {
 }
 
 function roundComplete() {
+
+    console.log("Dashes and Letters:" + dashesAndLetters)
+    console.log("Letters in Chosen Word:" + lettersInChosenWord)
     // Update the HTML to reflect the new number of guesses. Also update the correct guesses.
   document.getElementById("guesses-left").innerHTML = guessesRemaining;
   // This will print the array of guesses and blanks onto the page.
@@ -96,7 +101,7 @@ function roundComplete() {
 
     // Update the win counter in the HTML & restart the game.
     document.getElementById("win-counter").innerHTML = wins;
-    startGame();
+    start();
   }
 
     // If we've run out of guesses..
