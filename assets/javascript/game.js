@@ -1,27 +1,37 @@
-// Create an array of words
-var artistList = ["Picasso", "Rothko", "Pollock", "Warhol", "Monet", "Degas"]; 
+// GLOBAL VARIABLES 
+//------------------------------------------------------------------------
+// An array of words
+var artistList = ["picasso", "rothko", "pollock", "warhol", "monet", "degas"]; 
+// The randomly chosen word will be held in this string
+var chosenWord = "";
+// An array that will hold the individual letters of the chosen word
+var lettersInChosenWord = [];
+// This will be the number of blanks we show based on the solution
+var numBlanks = 0;
+// An empty array that will hold a mix of blank and solved letters (ex: 'n, _ _, n, _').
+var dashesAndLetters = [];
+// This array will hold the incorrect guesses
+var wrongGuesses = [];
 
-// Create an empty array of dashes
-var dash = [];
+// Variables to hold the number of wins and guesses remaining
+var wins = 0;
+var losses = 0;
+var guessesRemaining = 10;
 
-// Create an empty array of guessed letters
-var guessedLetters = [];
-
-// Create an array of letters in the word
-var lettersInWord = [];
-
+// FUNCTIONS
+//------------------------------------------------------------------------
 // Computer randomly selects one word
 var randomGuess = artistList[Math.floor(Math.random() * artistList.length)];
 console.log(randomGuess);
+
+// MAIN PROCESSES
+//------------------------------------------------------------------------
+
 
 // Declare variables for text that will be replaced within HTML
 var winsText = document.getElementById("winsText");
 var lettersGuessedText = document.getElementById("lettersGuessedText");
 var numbersGuessedText = document.getElementById("numbersGuessedText");
-
-// Declare variables to hold the number of wins and guesses remaining
-var wins = 0;
-var guessesRemaining = 10;
 
 // Dashes appear on the page based on the number of letters in the chosen word
 var dashes = function createDashes() {
@@ -60,19 +70,3 @@ function updateGuesses(letter) {
     }
 }
 
-// The user presses another letter key
-// The above steps are repeated UNTIL
-// All letters have been guessed and the user wins
-// Else, the user runs out of remaining guess and they lose
-// If the user wins, the page resets
-// If the user loses, alert "You lost!"
-
-// This might search for a letter:
-    // var indices(dash) = [];
-    // var array(artistList) = ['a', 'b', 'a', 'c', 'a', 'd'];
-    // var element(randomGuess) = 'a';
-    // var (ids)correctLetter = artistList.indexOf(randomGuess);
-    // while (correctLetter != -1) {
-    //   dash.push(correctLetter);
-    //   correctLetter = artistList.indexOf(element, correctLetter + 1); <
-    // }
