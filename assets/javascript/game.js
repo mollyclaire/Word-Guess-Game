@@ -116,8 +116,21 @@ function roundComplete() {
 
 // MAIN PROCESSES
 //------------------------------------------------------------------------
-start() 
-compareLetters() 
+start();
+
+// If a user presses a key...
+document.onkeyup = function(event) {
+    // and that key is a letter...
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
+      // The toLowerCase method will change any letter pressed to lower case
+      var letterGuessed = event.key.toLowerCase();
+      // The letter is then run through the compareLetters function
+      compareLetters(letterGuessed);
+      
+      // Runs the code after each round is done.
+      roundComplete();
+    }
+  };
 
 
 
