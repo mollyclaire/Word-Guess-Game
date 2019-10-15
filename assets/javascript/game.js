@@ -52,12 +52,72 @@ function start() {
     document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
 
 }
-start() 
+
+function compareLetters(letter) {
+    // Boolean to test whether the letter exists in the chosen word or not
+    var letterInWord = false;
+
+    // Loop through the word to see if the letter exists at all
+    for (var i=0; i < numBlanks; i++) {
+        if (chosenWord[i] === letter) {
+            letterInWord = true;
+        }
+    }
+    
+    // If the letter is there, replace the dash in the dashesAndLetters array with the letter
+    if (letterInWord) {
+        for (var j=0; j < numBlanks; j++) {
+            if (chosenWord[j] === letter) {
+                dashesAndLetters[j] = letter;
+            }
+        }
+    }
+    
+    // If the letter is not in the word, push that letter in the wrongGuesses array and decrease number of guesses left
+    else {
+        wrongGuesses.push(letter);
+        guessesRemaining--;
+    }
+}
+
+function roundComplete() {
+    // Update the HTML to reflect the new number of guesses. Also update the correct guesses.
+  document.getElementById("guesses-left").innerHTML = numGuesses;
+  // This will print the array of guesses and blanks onto the page.
+  document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+  // This will print the wrong guesses onto the page.
+  document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
+
+   // If we have gotten all the letters to match the solution...
+   if (lettersInChosenWord.toString() === blanksAndSuccesses.toString()) {
+    // ..add to the win counter & give the user an alert.
+    winCounter++;
+    alert("You win!");
+
+    // Update the win counter in the HTML & restart the game.
+    document.getElementById("win-counter").innerHTML = winCounter;
+    startGame();
+  }
+
+    // If we've run out of guesses..
+    else if (numGuesses === 0) {
+        // Add to the loss counter.
+        lossCounter++;
+        // Give the user an alert.
+        alert("You lose");
+    
+        // Update the loss counter in the HTML.
+        document.getElementById("loss-counter").innerHTML = lossCounter;
+        // Restart the game.
+        startGame();
+      }
+}
 
 
 // MAIN PROCESSES
 //------------------------------------------------------------------------
-
+start() 
+compareLetters() 
 
 
 
